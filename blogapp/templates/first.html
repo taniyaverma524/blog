@@ -1,23 +1,19 @@
-{% load static %}
-<html>
-<head>
-    <title>
-        BLOGIN
-    </title>
-</head>
-<body background="{% static 'first.jpg'%}">
+
+{% extends 'base_layout.html' %}
+
+{% block content %}
+
 <center>
     <h1 style="font-family:verdana;color:black;font-size :500%;">BLOGGING</h1>
     <div class="blg" style="background-color:#FFB6C1"; >
         {% for x in blg %}
-        <h2 style="font-family:verdana;"> <a href="second" >{{x.title }} </a></h2>
-k
+        <h2 style="font-family:verdana;"> <a href="{% url 'blogapp:second' x.slug%} ">{{x.title }} </a></h2>
+
             <p>{{x.half}}</p>
 
             <p>{{x.date}}</p>
         {% endfor %}
     </div>
 
-
-</body>
-</html>
+{% endblock %}
+    <!--/second/{{ x.slug}}-->

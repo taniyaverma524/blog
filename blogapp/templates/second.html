@@ -1,29 +1,30 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>BLOGGING</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+{% extends 'base_layout.html' %}
 
-</head>
-<body background="{% static 'first.jpg'%}">
+
+{% block content %}
+
 <center>
     <h1 style="font-family:verdana;color:black;font-size :500%;">BLOGGING</h1>
     <div class="blg1" style="background-color:#FFB6C1"; >
-        {% for x in blg1 %}
-            <h2 style="font-family:verdana;"> {{x.title }} </h2>
-            <p>{{x.body}}</p>
-            <p>{{x.date}}</p>
-        {% endfor %}
+            <h2 style="font-family:verdana;"> {{blg1.title }} </h2>
+            <p>{{blg1.body}}</p>
+            <p>{{blg1.date}}</p>
     </div>
 
-<form action="third" method="Post">
+        <div class="comment">
+            {% for comment in blog_comments %}
+            <br>
+                {{ comment.comment }}
+            <br>
+                {{ comment.email }}
+            <br>
+                {{ comment.created }}
+            {% endfor %}
+
+        </div>
+<form action="/third " method="POST" >
     {%csrf_token%}
-    {{frm.as_p}}
+    {{comment_forms.as_p}}
     <button class="btn btn-danger" type="submit">Submit comment</button>
 </form>
 </center>
@@ -35,5 +36,4 @@
            </button></a>
         </center>
     </footer>
-</body>
-</html>
+{% endblock %}

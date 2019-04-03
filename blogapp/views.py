@@ -1,22 +1,38 @@
-from django.shortcuts import render
-
-
+from django.shortcuts import render ,get_object_or_404
 from blogapp.forms import CommentForm
-from .models import *
+
+
+from .models import Blog ,Comment
+
 def home(request):
     blogs=Blog.objects.all().order_by('date')
     return render(request,'first.html',{'blg':blogs})
-def full( request):
-    blogs1=Blog.objects.all().order_by('date')
-    form1 = CommentForm()
-    return render(request,'second.html',{'blg1':blogs1,'frm':form1})
 
-def comment1(request, pk):
-    if request.method== 'Post':
-        form1=CommentForm(request.Post)
-        if form1.is_valid():
-            comment2=form1.cleaned_data['comment']
-            User.objects.create_user(comment3=comment2)
-            a={'data':comment3}
-            blogs2 = Blog.objects.all().order_by('date')
-            return render(request,'third.html',a,{'blg1':blogs2})
+def blog_detail( request,post_slug):
+    blog=Blog.objects.get(slug=post_slug)
+    blog_comments = Comment.objects.filter(blog__id=blog.id)
+    comment_forms= CommentForm()
+
+
+    return render(request,'second.html',{'blg1':blog,'blog_comments':blog_comments , "comment_forms":comment_forms})
+
+
+
+
+def show_comment(request,post_slug):
+    blog=get_object_or_404(Comment,pk=post_slug)
+    if request.method == 'POST':
+        comment_show = CommentForm(request.POST)
+        if comment_show.is_valid():
+            try:
+
+
+                comment_display=comment_show.cleaned_data["comment"]
+                email_display = comment_show.cleaned_data["email"]
+            except:
+                pass
+            # return render(request, 'third.html', {'comment': comment_display,'email':email_display})
+
+
+
+
