@@ -3,37 +3,59 @@
 
 {% block content %}
 
-<center>
-    <h1 style="font-family:verdana;color:black;font-size :500%;">BLOGGING</h1>
-    <div class="blg1" style="background-color:#FFB6C1"; >
-            <h2 style="font-family:verdana;"> {{blg1.title }} </h2>
-            <p>{{blg1.body}}</p>
-            <p>{{blg1.date}}</p>
-    </div>
+<div >
+           <a href="/"> <button class="btn btn-primary" style="padding: 20px;" type="submit" > GO BACK
 
-        <div class="comment">
+           </button></a>
+
+   </div>
+
+<h4>
+    {{ error}}
+</h4>
+<header>
+    <h1 style="font-size :500%;">BLOGGING</h1>
+    </header>
+
+
+
+        <nav>
+            <center>
+    <div class="blg1" style="background-color:#FFFFFF";" >
+            <h2 style="font-family:verdana;color:#000080";> {{blg1.title }} </h2>
+                <b style="color:#338AFF">{{blg1.date}}</b><br>
+            <I>{{blg1.body}}</I>
+
+</center>
+        </nav>
+   <section>
+<article>
+    <form action="{% url 'blogapp:second' blg1.slug%}  " method="POST" >
+    {%csrf_token%}
+    {{comment_forms.as_p}}
+    <button class="btn btn-primary"  type="submit">Submit comment</button>
+</form>
+</article>
+
+
+
+<aside>
+<h1 style="background-color:#FFFFFF;font-family:verdana;color:#000080";" >COMMENTS</h1>
+
+        <div class="comment" style="font-size:120%;">
+
             {% for comment in blog_comments %}
-            <br>
-                {{ comment.comment }}
-            <br>
-                {{ comment.email }}
-            <br>
+            <br>  <br>
+            <h3>{{ comment.comment }}</h3>
+
+            <h4>{{ comment.email }}</h4>
+
                 {{ comment.created }}
             {% endfor %}
 
         </div>
-<form action="/third " method="POST" >
-    {%csrf_token%}
-    {{comment_forms.as_p}}
-    <button class="btn btn-danger" type="submit">Submit comment</button>
-</form>
-</center>
 
- <footer>
-        <center>
-           <a href="/"> <button class="btn btn-danger" type="submit" > GO BACK
+</aside>
+    </section>
 
-           </button></a>
-        </center>
-    </footer>
 {% endblock %}

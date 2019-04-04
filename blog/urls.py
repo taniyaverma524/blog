@@ -17,8 +17,11 @@ from django.contrib import admin
 from django.urls import include
 from django.urls import path
 from blogapp  import urls as blog_url
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(blog_url)),
 ]
+
+urlpatterns += staticfiles_urlpatterns()

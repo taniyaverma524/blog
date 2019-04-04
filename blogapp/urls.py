@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import home, blog_detail , show_comment
+from .views import home, blog_detail
 
 app_name = 'blogapp'
 
@@ -7,6 +7,6 @@ app_name = 'blogapp'
 urlpatterns = [
     path('', home),
     path('second/<slug:post_slug>/',blog_detail , name="second"),
-    path('third',show_comment),
+
 
 ]

@@ -4,16 +4,18 @@
 {% block content %}
 
 <center>
-    <h1 style="font-family:verdana;color:black;font-size :500%;">BLOGGING</h1>
-    <div class="blg" style="background-color:#FFB6C1"; >
+    <header>
+        <h1 style="font-size :500%;" >BLOGGING</h1></header>
+    <section>
+    <div class="blg" style="background-color:#FFFFFF;">
         {% for x in blg %}
-        <h2 style="font-family:verdana;"> <a href="{% url 'blogapp:second' x.slug%} ">{{x.title }} </a></h2>
+        <h2 style="font-family:verdana;color:#000080;"> <a href="{% url 'blogapp:second' x.slug%} ">{{x.title }} </a></h2>
 
             <p>{{x.half}}</p>
 
             <p>{{x.date}}</p>
         {% endfor %}
     </div>
-
+    </section>
 {% endblock %}
     <!--/second/{{ x.slug}}-->
