@@ -1,6 +1,6 @@
 {% extends 'base_layout.html' %}
 
-
+{% load static %}
 {% block content %}
 
 <div >
@@ -13,9 +13,7 @@
 <h4>
     {{ error}}
 </h4>
-<header>
-    <h1 style="font-size :500%;">BLOGGING</h1>
-    </header>
+
 
 
 
@@ -56,6 +54,7 @@
         </div>
 
 </aside>
+       <img src="{% static 'thankyou .png' %}">
     </section>
 
 {% endblock %}

@@ -2,10 +2,9 @@
 {% extends 'base_layout.html' %}
 
 {% block content %}
-
+{% load static %}
 <center>
-    <header>
-        <h1 style="font-size :500%;" >BLOGGING</h1></header>
+
     <section>
     <div class="blg" style="background-color:#FFFFFF;">
         {% for x in blg %}
@@ -15,7 +14,7 @@
 
             <p>{{x.date}}</p>
         {% endfor %}
-    </div>
+    </div> <img src="{% static 'thankyou .png' %}">
     </section>
 {% endblock %}
     <!--/second/{{ x.slug}}-->
