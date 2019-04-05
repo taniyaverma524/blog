@@ -21,9 +21,6 @@ def blog_detail(request, post_slug):
         else:
             return render(request, "second.html",
                           {'blg1': blog, 'blog_comments': blog_comments, "comment_forms": comment_show, 'error': comment_show.errors})
-
-
-
     comment_forms = CommentForm()
 
     return render(request, 'second.html',

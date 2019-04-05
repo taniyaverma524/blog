@@ -9,7 +9,7 @@ class Blog(models.Model):
     body = models.TextField()
     date = models.DateTimeField(auto_now=True)
     def __str__(self):
-        return self.title
+        return self.blog.title
 
     def half(self):
         return self.body[:50] + "...."
