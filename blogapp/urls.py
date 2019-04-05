@@ -6,7 +6,7 @@ app_name = 'blogapp'
 
 urlpatterns = [
     path('', home),
-    path('second/<slug:post_slug>/',blog_detail , name="second"),
+    path('<slug:post_slug>',blog_detail , name="second"),
 
 
 ]

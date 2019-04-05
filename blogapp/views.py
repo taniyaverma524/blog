@@ -17,7 +17,7 @@ def blog_detail(request, post_slug):
         if comment_show.is_valid():
             Comment.objects.create(blog=blog, comment=comment_show.cleaned_data['comment'],
                                    email=comment_show.cleaned_data['email'])
-            return redirect("/second/" + post_slug)
+            return redirect( post_slug)
         else:
             return render(request, "second.html",
                           {'blg1': blog, 'blog_comments': blog_comments, "comment_forms": comment_show, 'error': comment_show.errors})
