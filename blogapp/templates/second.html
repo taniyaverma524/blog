@@ -3,29 +3,33 @@
 {% load static %}
 {% block content %}
 
+
 <div >
            <a href="/"> <button class="btn btn-primary" style="padding: 20px;" type="submit" > GO BACK
 
            </button></a>
 
-   </div>
+</div>
 
-<h4>
-    {{ error}}
-</h4>
+<script>
+var error1;
+error1 ="{{error}}";
+if(error1){
+alert("Please enter valid email address ");
+}
 
+</script>
 
-
-
-        <nav>
-            <center>
+<nav>
+    <center>
     <div class="blg1" style="background-color:#FFFFFF";" >
             <h2 style="font-family:verdana;color:#000080";> {{blg1.title }} </h2>
-                <b style="color:#338AFF">{{blg1.date}}</b><br>
-            <I>{{blg1.body}}</I>
+                   <b style="color:#338AFF">{{blg1.date}}</b><br>
+             <I>{{blg1.body}}</I>
+    </div>
 
 </center>
-        </nav>
+</nav>
    <section>
 <article>
     <form action="{% url 'blogapp:second' blg1.slug%}  " method="POST" >
@@ -54,7 +58,7 @@
         </div>
 
 </aside>
-       <img src="{% static 'thankyou .png' %}">
+       <img src="{% static 'thanking.png' %}">
     </section>
 
 {% endblock %}
