@@ -2,13 +2,26 @@
 {% load static %}
 
 
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>BLOGGING</title>
 
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <style>
+.gradient-indigo-purple{background-image: linear-gradient(0deg, #2d88f4, #1c549f); border-radius:5px;}
+.btn-pink.btn-raised, .btn-pink.btn-fab{ background-color: #36d7b7 !important; border-color: #36d7b7 !important;}
+.card-footer{border-top: 1px solid rgba(255, 255, 255, 0.5);padding-top: 10px;
+    display: inline-block;
+    width: 100%;
+    margin-top: 10px; padding-bottom:20px;}
+.login_av{ width:120px; height: 120px; border-radius: 100%; overflow: hidden; display: block; margin: 0 auto;}
+.login_av img{ width:84%;}
+.card .card-img.overlap{margin-top:-47px;}
+.custom_width{ width:400px; display:block; margin:15% auto 0 auto;}
+.form-control{margin-bottom:15px;}
+.float-left a{ color:#fff;}
+        </style>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -57,13 +70,18 @@ section:after {
     height:100%;
   }
 }
+section1 {
+background-color:#FFFFFF;
+width:50%;
+
+}
 </style>
 
 
 </head>
 
 <body background="{% static 'background.jpg'%}">
-<center><header><h1 style="font-size :500%;" ><img src="{% static 'logo11.png' %}">BLOGGING</h1></header></center>
+<!--<center><header><h1><img src="{% static 'logo11.png' %}">BLOGGING</h1></header></center>-->
 
 {% block content %}
 

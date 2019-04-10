@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 
 
 
@@ -26,3 +26,8 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ('-created',)
+
+
+class Phoneno(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="keys", related_query_name="key")
+    phoneno = models.IntegerField(max_length=50,unique=True)

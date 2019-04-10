@@ -1,8 +1,11 @@
 
 from django.shortcuts import render, redirect
-from blogapp.forms import CommentForm
+from blogapp.forms import CommentForm, UserForm,PhoneForm
 from .models import Blog, Comment
+from django.contrib.admin.models import User
 
+def frontpage(request):
+    return render( request,"login.html")
 
 def home(request):
     blogs = Blog.objects.all().order_by('date')
@@ -30,6 +33,13 @@ def blog_detail(request, post_slug):
     return render(request, 'second.html',
                   {'blg1': blog, 'blog_comments': blog_comments, "comment_forms": comment_forms})
 
+def loginpage(request):
+    if request.method == "POST":
+        form_show=UserForm(request.POST)
+        phone_show=PhoneForm(request.show)
+        if (form_show.is_valid() and phone_show.is_valid()):
+            form.save()
+            form.save()
 
 
 
