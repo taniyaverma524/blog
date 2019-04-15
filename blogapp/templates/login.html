@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 <center>
-
+<header><h1 style="color:black">BLOGGING</h1></header>
     <section >
 
         <div class="container-fluid">
@@ -18,11 +18,12 @@
                         <div class="card-body">
                             <div class="card-block">
                                 <h2>Login</h2>
-                                <form>
+                                <form method="POST" action="login">
+                                    {%csrf_token%}
                                     <div class="form-group">
                                         <div class="col-md-12">
-                                            <input type="email" class="form-control black" name="email" id="inputEmail"
-                                                   placeholder="Email" required>
+                                            <input type="text" class="form-control black" name="username" id="username"
+                                                   placeholder="Username" required>
                                         </div>
                                     </div>
 
@@ -46,24 +47,34 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <div class="col-md-12">
-                                            <button type="submit" class="btn btn-pink btn-block btn-raised">Submit
-                                            </button>
+                                        <div class="col-md-12" >
+                                              <a><button type="submit" class="btn btn-pink btn-block btn-raised" >SUBMIT</button></a>
                                             <!-- <button type="button" class="btn btn-secondary btn-block btn-raised">Cancel</button> -->
                                         </div>
                                     </div>
-                                </form>
+                                    </form>
+
                             </div>
                         </div>
+
+
+                        <div class="form-group" >
+                            <div class="col-md-12" >
+                            <div class="float-left"><a>OR</a></div>
+                                            <!-- <div class="float-right"><a (click)="onRegister()">New User?</a></div> -->
+                         </div>
+                   </div>
+
                         <div class="card-footer">
-                            <div class="float-left"><a>Recover Password</a></div>
-                            <!-- <div class="float-right"><a (click)="onRegister()">New User?</a></div> -->
+                            <div class="col-md-12" >
+                           <a href="signup"><button type="submit" class="btn btn-pink btn-block btn-raised" >SIGN_UP</button></a>
                         </div>
-                    </div>
+                        </div>
+            </div>
                 </div>
-                    </div>
             </div>
         </div>
+
     </section>
 
 </center>

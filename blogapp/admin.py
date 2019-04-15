@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Blog, Comment , Phoneno
+from .models import Blog, Comment , Profile
 from django.contrib.auth.models import User
 
 
@@ -13,8 +13,8 @@ class CommentAdmin(admin.ModelAdmin):
 # class UserAdmin(admin.ModelAdmin):
 #     readonly_fields = ("username","first_name","last_name","email")
 
-class PhonenoAdmin(admin.ModelAdmin):
-    readonly_fields = ("phoneno",)
+class ProfileAdmin(admin.ModelAdmin):
+    readonly_fields = ("phone",)
 
 # admin.site.unregister(User)
 # admin.site.register(User,UserAdmin)
@@ -23,4 +23,4 @@ admin.site.register(Blog, BlogAdmin)
 admin.site.register(Comment, CommentAdmin)
 
 
-admin.site.register(Phoneno,PhonenoAdmin)
+admin.site.register(Profile,ProfileAdmin)

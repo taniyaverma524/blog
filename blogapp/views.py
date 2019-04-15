@@ -1,13 +1,43 @@
+from django.contrib.auth.models import User
+from django.shortcuts import render, redirect , HttpResponse
+from blogapp.forms import CommentForm, UserForm, ProfileForm
+from .models import Blog, Comment, Profile
+from django.contrib.auth import authenticate ,login
 
-from django.shortcuts import render, redirect
-from blogapp.forms import CommentForm, UserForm,PhoneForm
-from .models import Blog, Comment
-from django.contrib.admin.models import User
-
-def frontpage(request):
+def loginpage(request):
     return render( request,"login.html")
 
-def home(request):
+def signup_page(request):
+    if request.method == "POST":
+        user_form = UserForm(request.POST)
+        profile_form = ProfileForm(request.POST)
+
+        if (user_form.is_valid() and profile_form.is_valid() ):
+
+            username=user_form.cleaned_data['username']
+            email=user_form.cleaned_data['email']
+            first_name=user_form.cleaned_data['first_name']
+            last_name=user_form.cleaned_data['last_name']
+            password=user_form.cleaned_data['password']
+            user= User.objects.create(username=username, last_name=last_name, first_name=first_name, email=email)
+            user.set_password(password)
+            user.save()
+            # print(user)
+            # User.objects.create(**user_form.cleaned_data)
+
+            phone = profile_form.cleaned_data.get('phone')
+            Profile.objects.create(user=user, phone=phone)
+            return redirect("/homepage")
+        else:
+
+            return render(request,"signup.html",{"user_form":user_form,"phone_form":profile_form})
+    else:
+        user_form = UserForm()
+        profile_form = ProfileForm()
+        return render(request,"signup.html",{"user_form":user_form,"phone_form":profile_form})
+
+
+def blog_home(request):
     blogs = Blog.objects.all().order_by('date')
     return render(request, 'first.html', {'blg': blogs})
 
@@ -33,18 +63,19 @@ def blog_detail(request, post_slug):
     return render(request, 'second.html',
                   {'blg1': blog, 'blog_comments': blog_comments, "comment_forms": comment_forms})
 
-def loginpage(request):
-    if request.method == "POST":
-        form_show=UserForm(request.POST)
-        phone_show=PhoneForm(request.show)
-        if (form_show.is_valid() and phone_show.is_valid()):
-            form.save()
-            form.save()
 
-
-
-
-
+def login_verification(request):
+    username=request.POST.get('username')
+    password=request.POST.get('password')
+    print(username)
+    print(password)
+    user = authenticate(username=username, password=password)
+    print(user)
+    if user is not None:
+        login(request,user)
+        return redirect("/homepage")
+    else:
+        return HttpResponse("<h1> INVALID </h1>")
 
 
 

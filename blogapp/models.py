@@ -28,6 +28,6 @@ class Comment(models.Model):
         ordering = ('-created',)
 
 
-class Phoneno(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="keys", related_query_name="key")
-    phoneno = models.IntegerField(max_length=50,unique=True)
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="keys", related_query_name="key")
+    phone = models.IntegerField(unique=True)
