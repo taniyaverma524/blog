@@ -19,14 +19,20 @@ def signup_page(request):
             first_name=user_form.cleaned_data['first_name']
             last_name=user_form.cleaned_data['last_name']
             password=user_form.cleaned_data['password']
+
+
             user= User.objects.create(username=username, last_name=last_name, first_name=first_name, email=email)
             user.set_password(password)
+
             user.save()
             # print(user)
             # User.objects.create(**user_form.cleaned_data)
 
             phone = profile_form.cleaned_data.get('phone')
-            Profile.objects.create(user=user, phone=phone)
+
+            gender = profile_form.cleaned_data.get('gender')
+            city = profile_form.cleaned_data.get('city')
+            Profile.objects.create(user=user, phone=phone,city=city, gender=gender)
             return redirect("/homepage")
         else:
 

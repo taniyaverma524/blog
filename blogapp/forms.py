@@ -7,7 +7,7 @@ class CommentForm(forms.Form):
     comment=forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Enter Comment '}),required=True)
     email = forms.EmailField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Enter email '}), required=True)
 
-class UserForm(forms.ModelForm):
+class UserForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter UserName'}),
                                required=True, max_length=30)
 
@@ -27,12 +27,9 @@ class UserForm(forms.ModelForm):
         max_length=30)
 
     confirm_password = forms.CharField(
-        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Enter Confirm Password'}),
-        required=True, max_length=30)
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Enter Password'}), required=True,
+        max_length=30)
 
-    class Meta:
-        model =User
-        fields= ('first_name', 'last_name', 'username', 'email', 'password')
 
     def clean_email(self):
         email=self.cleaned_data['email']
@@ -42,11 +39,16 @@ class UserForm(forms.ModelForm):
              raise forms.ValidationError("Email is not Valid")
         return email
 
-    def clean_password(self):
-        password=self.cleaned_data['password']
-        confirm_password = self.cleaned_data['password']
-        print(password, confirm_password)
+    def clean_confirm_password(self):
+        print(self.cleaned_data)
+        password=self.cleaned_data.get('password')
+
+
+        confirm_password=self.cleaned_data.get('confirm_password')
+
+
         if(password!=confirm_password):
+
             raise  forms.ValidationError("confirm password is not matched ")
         else:
             if(len(password)<8):
@@ -55,10 +57,11 @@ class UserForm(forms.ModelForm):
                 raise forms.ValidationError("password must contain atleast a character")
             if(password.isalnum()):
                 raise forms.ValidationError("Password must contain atleast a special character")
+        return password
 
 
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields=['phone']
+        fields=['phone','gender','city']
 

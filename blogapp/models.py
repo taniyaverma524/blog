@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+# from django.db.models.signals import post_save
 
 
 class Blog(models.Model):
@@ -29,5 +30,22 @@ class Comment(models.Model):
 
 
 class Profile(models.Model):
+    MALE=1
+    FEMALE=2
+    TRANSGENDER=3
+    ROLE_CHOICES=(
+        (MALE,"male"),
+        (FEMALE,"female"),
+        (TRANSGENDER,"transgender"),
+    )
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="keys", related_query_name="key")
-    phone = models.IntegerField(unique=True)
+    phone = models.IntegerField(unique=True,default=0)
+    # birthday = models.DateField(blank=True, null=True)
+    gender=models.PositiveSmallIntegerField(choices=ROLE_CHOICES,default="")
+    city=models.CharField(max_length=50,default="")
+
+#
+# def create_profile(sender,**kwargs):
+#     if kwargs['created']:
+#         user_profile=Profile.objects.create(user=kwargs['instance'])
+# post_save.connect(create_profile ,sender=User)
