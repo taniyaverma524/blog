@@ -13,26 +13,28 @@ def signup_page(request):
         profile_form = ProfileForm(request.POST)
 
         if (user_form.is_valid() and profile_form.is_valid() ):
+            user_form.save()
+            profile_form.save()
 
-            username=user_form.cleaned_data['username']
-            email=user_form.cleaned_data['email']
-            first_name=user_form.cleaned_data['first_name']
-            last_name=user_form.cleaned_data['last_name']
-            password=user_form.cleaned_data['password']
-
-
-            user= User.objects.create(username=username, last_name=last_name, first_name=first_name, email=email)
-            user.set_password(password)
-
-            user.save()
-            # print(user)
-            # User.objects.create(**user_form.cleaned_data)
-
-            phone = profile_form.cleaned_data.get('phone')
-
-            gender = profile_form.cleaned_data.get('gender')
-            city = profile_form.cleaned_data.get('city')
-            Profile.objects.create(user=user, phone=phone,city=city, gender=gender)
+            # username=user_form.cleaned_data['username']
+            # email=user_form.cleaned_data['email']
+            # first_name=user_form.cleaned_data['first_name']
+            # last_name=user_form.cleaned_data['last_name']
+            # password=user_form.cleaned_data['password']
+            #
+            #
+            # user= User.objects.create(username=username, last_name=last_name, first_name=first_name, email=email)
+            # user.set_password(password)
+            #
+            # user.save()
+            # # print(user)
+            # # User.objects.create(**user_form.cleaned_data)
+            #
+            # phone = profile_form.cleaned_data.get('phone')
+            # birthday= profile_form.cleaned_data.get('birthday')
+            # gender = profile_form.cleaned_data.get('gender')
+            # city = profile_form.cleaned_data.get('city')
+            # Profile.objects.create(user=user, phone=phone,city=city, gender=gender, birthday=birthday)
             return redirect("/homepage")
         else:
 
@@ -71,17 +73,30 @@ def blog_detail(request, post_slug):
 
 
 def login_verification(request):
+
     username=request.POST.get('username')
     password=request.POST.get('password')
     print(username)
     print(password)
-    user = authenticate(username=username, password=password)
-    print(user)
-    if user is not None:
-        login(request,user)
-        return redirect("/homepage")
+    if (username.isdigit()):
+        user=Profile.objects.get(phone=username).user
+
+
+        if user.check_password(password):
+            return redirect("/homepage")
+        else:
+            return HttpResponse("<h1> INVALID </h1>")
     else:
-        return HttpResponse("<h1> INVALID </h1>")
+
+
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+            login(request,user)
+            return redirect("/homepage")
+        else:
+            return HttpResponse("<h1> INVALID </h1>")
+
 
 
 

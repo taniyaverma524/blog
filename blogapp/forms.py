@@ -30,6 +30,16 @@ class UserForm(forms.Form):
         widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Enter Password'}), required=True,
         max_length=30)
 
+    class Meta():
+        model = User
+        fields = ['username', 'email', 'first_name', 'last_name', 'password', 'confirm_password']
+
+    def clean_username(self):
+        username=self.cleaned_data['username']
+        if username.isdigit():
+            raise forms.ValidationError("user must contain atleast a character")
+
+        return username
 
     def clean_email(self):
         email=self.cleaned_data['email']
@@ -59,9 +69,15 @@ class UserForm(forms.Form):
                 raise forms.ValidationError("Password must contain atleast a special character")
         return password
 
-
+YEARS= [x for x in range(1940,2021)]
 class ProfileForm(forms.ModelForm):
+    phone=forms.IntegerField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter mobile number '}), required=True)
+    city= forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter city'}), required=True,
+        max_length=30)
+
+    birthday= forms.DateField(label='Birthday', widget=forms.SelectDateWidget(years=YEARS))
     class Meta:
         model = Profile
-        fields=['phone','gender','city']
+        fields=['phone','city','gender','birthday']
 

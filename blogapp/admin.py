@@ -14,7 +14,7 @@ class CommentAdmin(admin.ModelAdmin):
 #     readonly_fields = ("username","first_name","last_name","email")
 
 class ProfileAdmin(admin.ModelAdmin):
-    readonly_fields = ("phone",)
+    readonly_fields = ("phone","gender","birthday","city")
 
 # admin.site.unregister(User)
 # admin.site.register(User,UserAdmin)

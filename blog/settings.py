@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
 ]
+# AUTH_USER_MODEL = 'blogapp.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
