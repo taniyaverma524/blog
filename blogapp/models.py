@@ -7,6 +7,9 @@ from django.db.models.signals import post_save
 
 
 
+
+
+
 class Blog(models.Model):
     title = models.CharField(max_length=32)
     slug = models.SlugField(max_length=32,unique=True)
@@ -57,21 +60,21 @@ class Profile(models.Model):
 #
 # class UserManager(BaseUserManager):
 #     use_in_migrations=True
+# def save(self, *args, *kwargs):
+#     u = super(User, self).save(*args, **kwargs)
+#     Profile.objects.get_or_create(user=u.id)
+#     return u
 
 
+@receiver(post_save , sender=User)
+def my_handler(sender , instance ,  created , **kwargs):
+    print("hello1dfsfs")
 
-#
-# def create_profile(sender,**kwargs):
-#     if kwargs['created']:
-#         user_profile=Profile.objects.create(user=kwargs['instance'])
-#
-# post_save.connect(create_profile ,sender=User)
+    if created:
+        Profile.objects.get_or_create(user=instance)
+    print("hello1")
 
-
-
-def create_profile(sender, **kwargs):
-    user = kwargs["instance"]
-    if kwargs["created"]:
-        up = Profile(user=user, stuff=1, thing=2)
-        up.save()
-post_save.connect(create_profile, sender=User)
+@receiver(post_save , sender=User)
+def save_user_profile(sender , instance , **kwargs):
+    instance.profile.save()
+    print("hello2")

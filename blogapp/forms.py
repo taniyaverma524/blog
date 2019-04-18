@@ -50,7 +50,7 @@ class UserForm(forms.Form):
         return email
 
     def clean_confirm_password(self):
-        print(self.cleaned_data)
+
         password=self.cleaned_data.get('password')
 
 

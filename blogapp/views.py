@@ -13,20 +13,21 @@ def signup_page(request):
         profile_form = ProfileForm(request.POST)
 
         if (user_form.is_valid() and profile_form.is_valid() ):
-            user_form.save()
-            profile_form.save()
 
-            # username=user_form.cleaned_data['username']
-            # email=user_form.cleaned_data['email']
-            # first_name=user_form.cleaned_data['first_name']
-            # last_name=user_form.cleaned_data['last_name']
-            # password=user_form.cleaned_data['password']
-            #
-            #
-            # user= User.objects.create(username=username, last_name=last_name, first_name=first_name, email=email)
-            # user.set_password(password)
-            #
-            # user.save()
+
+
+
+            username=user_form.cleaned_data['username']
+            email=user_form.cleaned_data['email']
+            first_name=user_form.cleaned_data['first_name']
+            last_name=user_form.cleaned_data['last_name']
+            password=user_form.cleaned_data['password']
+
+
+            user= User.objects.create(username=username, last_name=last_name, first_name=first_name, email=email)
+            user.set_password(password)
+
+            user.save()
             # # print(user)
             # # User.objects.create(**user_form.cleaned_data)
             #
@@ -76,8 +77,6 @@ def login_verification(request):
 
     username=request.POST.get('username')
     password=request.POST.get('password')
-    print(username)
-    print(password)
     if (username.isdigit()):
         user=Profile.objects.get(phone=username).user
 
