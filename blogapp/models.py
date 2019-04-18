@@ -44,7 +44,7 @@ class Profile(models.Model):
 
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="keys", related_query_name="key")
-    phone = models.IntegerField(unique=True,default=0)
+    phone = models.IntegerField(default=0)
     birthday=models.DateField(auto_now=False, null=True, blank=True)
     gender = models.CharField(max_length=200, choices=CATEGORY_CHOICES)
     city=models.CharField(max_length=50,default="")
@@ -71,10 +71,6 @@ def my_handler(sender , instance ,  created , **kwargs):
     print("hello1dfsfs")
 
     if created:
-        Profile.objects.get_or_create(user=instance)
-    print("hello1")
-
-@receiver(post_save , sender=User)
-def save_user_profile(sender , instance , **kwargs):
-    instance.profile.save()
-    print("hello2")
+     Profile.objects.get_or_create(user=instance)
+    instance.keys.save()
+    print("hello1",)
