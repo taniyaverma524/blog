@@ -3,19 +3,28 @@
 
 {% block content %}
 {% load static %}
-<center><header><h1><img src="{% static 'logo11.png' %}">BLOGGING</h1></header></center>
-<center>
 
-    <section>
-    <div class="blg" style="background-color:#FFFFFF;">
+
+
+<center>
+<section>
+<div class="container">
+    <div class="row">
+    <div class="col-md -12" style="background-color: #e3f2fd;">
         {% for x in blg %}
-        <h2 style="font-family:verdana;color:#000080;"> <a href="{% url 'blogapp:second' x.slug%} ">{{x.title }} </a></h2>
+        <h2 style="background-color: #e3f2fd;"> <a href="{{ x.get_absolute_url }}">{{x.title }} </a></h2>
 
             <p>{{x.half}}</p>
 
             <p>{{x.date}}</p>
         {% endfor %}
-    </div> <img src="{% static 'thanking.png' %}">
-    </section>
+    </div>
+    </div>
+</div>
+   </section>
+    <img src="{% static 'thanking.png' %}">
+</center>
 {% endblock %}
     <!--/second/{{ x.slug}}-->
+
+<!--    {% url 'blogapp:second' x.slug%}-->

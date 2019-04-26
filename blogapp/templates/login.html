@@ -1,4 +1,4 @@
-{% extends 'base_layout.html' %}
+{% extends 'base_layout_login.html' %}
 {% load static %}
 {% block content %}
 <center>
@@ -18,7 +18,7 @@
                         <div class="card-body">
                             <div class="card-block">
                                 <h2>Login</h2>
-                                <form method="POST" action="login">
+                                <form method="POST" action="/login">
                                     {%csrf_token%}
                                     <div class="form-group">
                                         <div class="col-md-12">
@@ -67,7 +67,7 @@
 
                         <div class="card-footer">
                             <div class="col-md-12" >
-                           <a href="signup"><button type="submit" class="btn btn-pink btn-block btn-raised" >SIGN_UP</button></a>
+                           <a href="/signup"><button type="submit" class="btn btn-pink btn-block btn-raised" >SIGN_UP</button></a>
                         </div>
                         </div>
             </div>

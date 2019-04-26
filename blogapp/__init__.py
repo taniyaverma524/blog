@@ -1,1 +1,1 @@
-# default_app_config='blogapp.apps.BlogappConfig'
+# app_config = 'blogapp.app.BlogappConfig'

@@ -1,14 +1,16 @@
 from django.urls import path
-from .views import blog_home, blog_detail,signup_page,loginpage,login_verification
+from .views import blog_home, blog_detail,signup_page,login_page,log_out,like_post
 
 app_name = 'blogapp'
 
 
 urlpatterns = [
-    path('',loginpage),
-    path('login',login_verification),
-    path('signup',signup_page),
-    path('homepage', blog_home),
-    path('<slug:post_slug>',blog_detail , name="second"),
+    path('', blog_home,name='blog_home'),
+    path('logout', log_out,name='log_out'),
+    path('login',login_page, name='login'),
+    path('signup',signup_page,name='signup'),
+    path('like_post',like_post, name='like_post'),
+    path('details-/<slug:post_slug>/',blog_detail , name="second"),
+
 
 ]

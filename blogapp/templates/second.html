@@ -3,62 +3,71 @@
 {% load static %}
 {% block content %}
 
-<center><header><h1><img src="{% static 'logo11.png' %}">BLOGGING</h1></header></center>
-<div >
-           <a href="/"> <button class="btn btn-primary" style="padding: 20px;" type="submit" > GO BACK
 
-           </button></a>
 
-</div>
 
 <script>
 var error1;
-error1 ="{{error}}";
+error1 ="{{errors }}";
 if(error1){
 alert("Please enter valid email address ");
 }
-
 </script>
-
-<nav>
+<div class="col-md-6" >
     <center>
-    <div class="blg1" style="background-color:#FFFFFF";" >
-            <h2 style="font-family:verdana;color:#000080";> {{blg1.title }} </h2>
-                   <b style="color:#338AFF">{{blg1.date}}</b><br>
-             <I>{{blg1.body}}</I>
-    </div>
+        <div class="blg1" style="background-color:#FFFFFF; font-family:verdana;">
 
-</center>
-</nav>
-   <section>
-<article>
-    <form action="{% url 'blogapp:second' blg1.slug%}  " method="POST" >
-    {%csrf_token%}
-    {{comment_forms.as_p}}
-    <button class="btn btn-primary"  type="submit">Submit comment</button>
-</form>
-</article>
+        <h2 style="font-family:verdana;color:#000080" ;> {{blg1.title }} </h2>
+        <b style="color:#338AFF">{{blg1.date}}</b><br>
+        <I>{{blg1.body}}</I>
 
 
+        <form action="/like_post" method="POST">
+            <p>Likes: {{blg1.like.count }}</p>
+                 {%csrf_token%}
 
-<aside>
-<h1 style="background-color:#FFFFFF;font-family:verdana;color:#000080";" >COMMENTS</h1>
+         {% if is_liked %}
+            <p>
+             <button type="submit"  name="post_id" value="{{ blg1.id}}" class="js-like-button like-btn glyphicon glyphicon-thumbs-down "> Dislike</button></p>
+         {% else %}
+
+             <button type="submit"  name="post_id" value="{{ blg1.id}}" class="js-like-button like-btn glyphicon glyphicon-thumbs-up"> Like</button></p>
+         {% endif %}
+        </form>
+
+
+
+        </div>
+
+    </center>
+</div>
+<div class="col-md-3">
+
+        <form action="{% url 'blogapp:second' blg1.slug%}  " method="POST">
+            {%csrf_token%}
+            {{comment_forms.as_p}}
+            <button class="btn btn-primary" type="submit">Submit comment</button>
+        </form>
+</div>
+
+
+   <div class="col-md-3">
+        <h1 style="background-color:#FFFFFF;font-family:verdana;color:#000080" ;" >COMMENTS</h1>
 
         <div class="comment" style="font-size:120%;">
 
             {% for comment in blog_comments %}
-            <br>  <br>
+            <br> <br>
             <h3>{{ comment.comment }}</h3>
 
             <h4>{{ comment.email }}</h4>
 
-                {{ comment.created }}
+            {{ comment.created }}
             {% endfor %}
 
         </div>
+   </div>
+    <img src="{% static 'thanking.png' %}">
 
-</aside>
-       <img src="{% static 'thanking.png' %}">
-    </section>
 
 {% endblock %}

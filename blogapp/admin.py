@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 
 
 class BlogAdmin(admin.ModelAdmin):
+    list_display = ('title', 'slug', 'updated', 'timestamp')
     prepopulated_fields = {"slug": ("title",)}
 
 class CommentAdmin(admin.ModelAdmin):

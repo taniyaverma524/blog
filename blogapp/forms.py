@@ -81,3 +81,9 @@ class ProfileForm(forms.ModelForm):
         model = Profile
         fields=['phone','city','gender','birthday']
 
+    def clean_phone(self):
+        phone=self.cleaned_data.get('phone')
+        length=len(str(phone))
+        if (length>10 or length<10):
+            raise forms.ValidationError("mobile number must be of 10 digit")
+        return phone
