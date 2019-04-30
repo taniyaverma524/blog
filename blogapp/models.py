@@ -25,7 +25,7 @@ class Blog(models.Model):
         return "/details-/%s/" %(self.slug)
 
 class Comment(models.Model):
-    blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='blogs', related_query_name='blog')
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='comment')
     comment = models.CharField(max_length=512)
     created = models.DateTimeField(auto_now=True)
     email = models.EmailField()

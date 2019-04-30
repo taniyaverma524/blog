@@ -3,14 +3,14 @@
 
 {% block content %}
 {% load static %}
-
-
+{% load blog_tag%}
 
 <center>
-<section>
+<div id="content">
 <div class="container">
     <div class="row">
-    <div class="col-md -12" style="background-color: #e3f2fd;">
+    <div class="col-md-6 column" style="background-color: #e3f2fd;">
+        <div id="content">
         {% for x in blg %}
         <h2 style="background-color: #e3f2fd;"> <a href="{{ x.get_absolute_url }}">{{x.title }} </a></h2>
 
@@ -18,13 +18,27 @@
 
             <p>{{x.date}}</p>
         {% endfor %}
+        </div>
     </div>
+
+            <div class="col-md-6 column" style="background-color: #e3f2fd;">
+                <div id="sidebar">
+            <h3>Most commented Post</h3>
+            {% get_most_commented_posts %}
+            </div>
+        </div>
     </div>
 </div>
-   </section>
-    <img src="{% static 'thanking.png' %}">
-</center>
+
+
+</div>
+      <img src="{% static 'thanking.png' %}">
+   </center>
+
+
+
 {% endblock %}
+
     <!--/second/{{ x.slug}}-->
 
 <!--    {% url 'blogapp:second' x.slug%}-->
